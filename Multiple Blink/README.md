@@ -9,7 +9,7 @@ Now that we have blinked at least 1 LED, what about blinking multiple LEDS at th
 # Multiple Blink
 The action item for the Multiple Blink was to blink two LEDs at completely separate frequencies. This code started from the code for Simple Blink so the same copyright message is included above the code.
 
-The Multiple Blink program starts out the same as the Simple Blink with the disabling of the watchdog timer.  This is a functionality that isn't used so there is no reason for it run. The next part 
+The Multiple Blink program starts out the same as the Simple Blink with the disabling of the watchdog timer.  This is a functionality that isn't used so there is no reason for it run. The next 
 
 ## README
 Remember to replace this README with your README once you are ready to submit. I would recommend either making a copy of this file or taking a screen shot. There might be a copy of all of these README's in a folder on the top level depending on the exercise.
