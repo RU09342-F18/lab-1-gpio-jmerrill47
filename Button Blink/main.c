@@ -43,36 +43,40 @@
  *
  * --/COPYRIGHT--*/
 //******************************************************************************
-//   MSP430F552x Demo - Software Toggle P1.0
+//  MSP430G2xx3 Demo - Software Toggle P1.0
 //
-//   Description: Toggle P1.0 by xor'ing P1.0 inside of a software loop.
-//   ACLK = 32.768kHz, MCLK = SMCLK = default DCO~1MHz
+//  Description; Toggle P1.0 by xor'ing P1.0 inside of a software loop.
+//  ACLK = n/a, MCLK = SMCLK = default DCO
 //
-//                MSP430F552x
+//                MSP430G2xx3
 //             -----------------
-//         /|\|                 |
+//         /|\|              XIN|-
 //          | |                 |
-//          --|RST              |
+//          --|RST          XOUT|-
 //            |                 |
 //            |             P1.0|-->LED
 //
-//   Bhargavi Nisarga
-//   Texas Instruments Inc.
-//   April 2009
-//   Built with CCSv4 and IAR Embedded Workbench Version: 4.21
+//  D. Dang
+//  Texas Instruments, Inc
+//  December 2010
+//   Built with CCS Version 4.2.0 and IAR Embedded Workbench Version: 5.10
 //******************************************************************************
+
 #include <msp430.h>
 
 int main(void)
 {
-  volatile unsigned int i;
+  WDTCTL = WDTPW + WDTHOLD;                 // Stop watchdog timer
+  P1DIR |= 0x01;                            // Set red LED pin to output direction
 
-  WDTCTL = WDTPW+WDTHOLD;                   // Stop watchdog timer
-  P1DIR |= BIT0;                            // LED1 (red) set in output direction
-
-  while(1)                                  // create continuous loop
+  for (;;)
   {
-    P1OUT ^= BIT0;                          // toggle BIT0 (LED1) with an XOR
-    for(i=50000;i>0;i--);                   // Create a delay
+    volatile unsigned int i;
+
+    P1OUT ^= 0x01;                          // Toggle red LED pin using XOR
+
+    i = 50000;                              // Create a delay using a do while loop
+    do (i--);
+    while (i != 0);
   }
 }
