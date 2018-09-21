@@ -72,6 +72,9 @@ int main(void)
   P1DIR |= BIT0;                            // LED1 (red) set in output direction
   P4DIR |= BIT7;                            // LED1 (red) set in output direction
 
+  P1OUT &= ~BIT0;                           //set initial state to no light
+  P1OUT &= ~BIT7;
+  
   i = 50000;                                //Set delay for LED1
   j = 7000;                                 //Set delay for LED2
 
@@ -93,4 +96,5 @@ int main(void)
         j=7000;                             // reset the delay
     }
   }
+}
 }
