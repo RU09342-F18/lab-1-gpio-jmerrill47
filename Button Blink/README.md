@@ -1,18 +1,6 @@
 # Button Blink
-Now that you have looked at blinking the LED from some built in delay, but what if we wanted to control the state of the LED by a button? You may think "Why would I need a Microcontroller to perform the job of a switch?". And that is where you come in. The bare minimum for this part of the lab is to essentially replicate a switch with your development board.
+The Buttom Blink program is the last on-board program for Lab 1 and the first program which requires an input.  The program starts off like every other program in this lab but there are a few differences between the G2 and F5529 board code.
 
-# YOU NEED TO CREATE THE FOLLOWING FOLDERS
-* MSP430G2553
-* MSP430F5529
+For the G2 board, the program starts off by stopping the watchdog timer (a functionality which is not used for this program just like every other program for Lab 1). Next, the LED was set to the output direction by ORing the P1DIR with the LEDs bit (BIT0). Then the internal resistor, that is connected to the button at P1.3, is enabled and then connected to power to become a pull up resistor.  This allows the button to be normally high.  Since the button is normally high, you need to generate logic that turns on the LED while the button is pressed down or when P1IN equals 0.  Since P1.3 is always on, when P1IN is changed to 0, the statement (P1IN & BIT3)!= BIT3 becomes true and the LED is toggled on using an XOR.  Since the program is running on an infinite while loop, the condition is always being checked and therefore if the if statement is false, the LED is automatically turned off, creating a momentary LED.  This is not by NOTing the LEDs pin.
 
-## README
-Remember to replace this README with your README once you are ready to submit. I would recommend either making a copy of this file or taking a screen shot. There might be a copy of all of these README's in a folder on the top level depending on the exercise. Make sure you talk about how your button is configured (momentary or continuous. Normally open or closed. Does the button press indicate when the LED should be on or off.)
-
-## Extra Work
-What can we do to make this a little bit more worthy of needing a microcontroller.
-
-### Button Based Speed Control
-Much like the UART controlled speed, what if you could cycle between speeds based on a button press? The speed could progress through a cycle of "Off-Slow-Medium-Fast" looping back when you hit the end.
-
-### Color Change
-What if upon a button press, the LED which was blinking changed. Some of the development boards contain two LEDs, so you could swap between a Red and a Green LED.
+For the F5529, the program starts off the same way with the watchdog timer being turned off, the direction of the LED being set but there are a few difference after that.  First, the button itself it set to the input direction since we want to take the input from the button.  This direction is set by ANDing the inverse of the pin.  Next, the internal resistor was enabled and set to be a pull up as well.  This was done by ORing the pin with P1REN (enable) and P1OUT (output).  The next part was exactly the same as the G2, same logic just different pins.
