@@ -62,12 +62,12 @@
 //   Built with CCS Version 4.2.0 and IAR Embedded Workbench Version: 5.10
 //******************************************************************************
 
-#include <msp430.h>
-
 int main(void)
 {
   WDTCTL = WDTPW + WDTHOLD;                 // Stop watchdog timer
   P1DIR |= 0x41;                            // Set the Green and Red LED pins to output direction
+  P1OUT &= ~BIT0;                           //initalize LEDs as 0
+  P1OUT &= ~BIT6;
 
   volatile unsigned int i;                  //create two ints for the frequency for each light
   volatile unsigned int j;
@@ -94,3 +94,4 @@ int main(void)
     }
   }
 }
+
