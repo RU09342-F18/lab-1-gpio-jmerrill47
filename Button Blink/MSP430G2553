@@ -4,8 +4,8 @@ void main(void)
 {
     WDTCTL = WDTPW + WDTHOLD;           //stop watchdog timer
     P1DIR |= BIT0;                      //set the red LED pin (BIT0) to output direction
-    P1REN = BIT3;                       //enable the internal resistor
-    P1OUT = BIT3;                       //internal resistor is connected to power, meaning it's a pull-up resistor
+    P1REN = BIT3;                       //internal resistor connected to the button is enabled
+    P1OUT |= BIT3;                      //internal resistor is connected to power, meaning it's a pull-up resistor
     while(1)
     {
         if((P1IN & BIT3)!= BIT3)        //Since BIT3 is always on and when the button is pressed, P1IN equals 0, when P1IN equals 0, the statement is true
